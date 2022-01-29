@@ -20,13 +20,14 @@ If a player decides not to play again the game is over.
 
 class Director:
     def __init__(self):
-        self.card = []
+        self.deal = []
         self.is_playing = True
         self.score = 0
         self.total_score = 300
-
-        card = Deck()
-        self.card.append(card)
+    #creates within a 
+        for i in range(2):
+            deck = Deck()
+            self.deal.append(deck)
 
     def start_game(self):
         while self.is_playing:
@@ -41,15 +42,20 @@ class Director:
     def play_game(self):
         if not self.is_playing:
             return
-        hand = []
-        if hand == '':
-            hand.append(Deck.draw())
+
+        hand = 'empty'
+        if hand == 'empty':
+            hand = self.deal[0]
+            hand.draw()
+            hand = hand.card
         else:
             pass
 
         print(f'The Card is : {hand}')
         hi_lo = input('Higher or Lower? [h/l]: ') 
-        card = Deck.draw()
+        card = self.deal[1]
+        card.draw()
+        card = card.card
         if hi_lo == 'h':
             if card < hand:
                 self.score += -75
@@ -78,7 +84,6 @@ class Director:
         print(f'Your score is: {self.total_score}')
         self.is_playing == (self.score > 0)
 
-
-
-
+director = Director()
+director.start_game()
 

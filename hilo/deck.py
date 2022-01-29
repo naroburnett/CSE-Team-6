@@ -8,4 +8,4 @@ class Deck:
 
     def draw(self):
         #draws a random card from deck
-        self.value = random.randint(1, 13)
+        self.card = random.randint(1, 13)
