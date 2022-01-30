@@ -9,3 +9,7 @@ class Deck:
     def draw(self):
         #draws a random card from deck
         self.card = random.randint(1, 13)
+
+# deck = Deck()
+# deck.draw()
+# print(f'{deck.card}')
