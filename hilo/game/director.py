@@ -28,7 +28,7 @@ class Director:
         self.deal = []
         self.is_playing = True
         #self.score = 0
-        self.total_score = 300
+        self.total_score = 75
         self.first_round = False
     #creates within a list two instances of deck class
         for i in range(2):
@@ -42,9 +42,14 @@ class Director:
             self.play_again()
     
     def play_again(self):
-       draw_card = input('Do you want to play again? [y/n]:')
-       self.is_playing = (draw_card == 'y')
-       self.first_round = (draw_card == 'y')
+        if self.total_score <= 0:
+            print('Looks like you lost, thanks for playing!')
+            exit()
+        else:
+            draw_card = input('Do you want to play again? [y/n]:')
+            self.is_playing = (draw_card == 'y')
+            self.first_round = (draw_card == 'y')
+
     
     def play_game(self):
         if not self.is_playing:
