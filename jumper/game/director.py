@@ -1,19 +1,36 @@
-# import word
-# import game.game_display
-from game_display import game_display
+from display import Display
+from hidden_word import Hidden_Word
+from terminal_service import TerminalService
 
-class director:
+class Director:
 
     def __init__(self):
-        self.score = 5
-        pass
-
-    
+        self.word = Hidden_Word()
+        self._is_playing = True
+        self._display = Display()
+        self._terminal_service = TerminalService()
+        self._score = 0
 
     def game_start(self):
-        game_display.guy(self)
-        game_display.parachute(self)
-        
+        while self._is_playing:
+            self._get_inputs()
+            # self._do_updates()
+            # self._do_outputs()
+
+    def _get_inputs(self):
+        guess = input("Guess a letter?")
+        self._display.word_reveal(self.word.get_word, guess)
+
+    # def _do_updates(self):
+    #     #
+    #     #
+
+    # def _do_outputs(self):
+
+    #     if self._hidden_word.is_found():
+    #         self._is_playing = False
+    
+
 
 
 
@@ -29,4 +46,5 @@ class director:
         
 #         pass
 
-# director.game_start()
+director = Director()
+director.game_start()

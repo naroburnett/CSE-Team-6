@@ -1,7 +1,7 @@
 import random
 
 
-class word:
+class Hidden_Word:
     def __init__(self):
         word_catalog = ["Abuse","Adult","Agent","Anger","Apple","Award","Basis"
         ,"Beach","Birth","Block","Blood","Board","Brain","Brain","Bread"
@@ -14,6 +14,18 @@ class word:
         ,"Pilot","Pitch","Place","Plane","Plate","Point","Pound"]
         
         self._word = random.choice(word_catalog)
+    
+    def get_word(self):
+        return self._word
+
+    def is_found(self):
+        return True
+
+
+
+
+
+
 
 
 
