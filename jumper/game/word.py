@@ -1,8 +1,10 @@
 import random
 
+#This class is responsible for determining the secret word. It gets pulled from a catalog of 5 letter words
 
 class word:
     def __init__(self):
+        #creates list within word class called word_catalog
         word_catalog = ["Abuse","Adult","Agent","Anger","Apple","Award","Basis"
         ,"Beach","Birth","Block","Blood","Board","Brain","Brain","Bread"
         ,"Break","Break","Brown","Buyer","Cause","Chain","Chair","Chest"
@@ -10,9 +12,10 @@ class word:
         ,"Final","Force","Floor","Focus","Frame","Guide","Heart","Henry"
         ,"Hotel","House","Image","Index","Input","Judge","Knife","Lunch"
         ,"Limit","Model","Motor","Mouth","Month","Money","Music","Night"
-        "Noise","North","Novel","Nurse","Offer","Order","Phase","Peace"
+        ,"Noise","North","Novel","Nurse","Offer","Order","Phase","Peace"
         ,"Pilot","Pitch","Place","Plane","Plate","Point","Pound"]
-        
+         
+        #randomly selects word form list
         self._word = random.choice(word_catalog)
 
 
