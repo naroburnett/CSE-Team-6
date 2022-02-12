@@ -1,50 +1,60 @@
-from display import Display
-from hidden_word import Hidden_Word
-from terminal_service import TerminalService
+from game.display import Display
+from game.hidden_word import Hidden_Word
+from game.terminal_service import TerminalService
 
 class Director:
 
     def __init__(self):
-        self.word = Hidden_Word()
+        self.hidden_word = Hidden_Word()
         self._is_playing = True
         self._display = Display()
         self._terminal_service = TerminalService()
         self._score = 0
+        self.guess = ''
+    
+    def calculate_guess(self):
+        self._display.create_word_banner(self.hidden_word.secret_word, self.guess)
+        self._display.create_parachute(self._score)
+        self._display.create_guy()
 
-    def game_start(self):
+    def results(self):
+         self._display.display_results()
+
+    def start_game(self):
+        """Starts the game by running the main game loop.
+        
+        Args:
+            self (Director): an instance of Director.
+        """
+        self.starting_info()
+
         while self._is_playing:
             self._get_inputs()
-            # self._do_updates()
-            # self._do_outputs()
-
-    def _get_inputs(self):
-        guess = input("Guess a letter?")
-        self._display.word_reveal(self.word.get_word, guess)
-
-    # def _do_updates(self):
-    #     #
-    #     #
-
-    # def _do_outputs(self):
-
-    #     if self._hidden_word.is_found():
-    #         self._is_playing = False
+            self._do_updates()
+            self._do_outputs()
+        
     
 
+    def starting_info(self):
+        self.results()
 
+    def _get_inputs(self):
+        self.guess = input("Guess a Letter?: ").lower()
 
+    def _do_updates(self):
+        self.calculate_guess()
 
-#     def guess():
-#         letter = input('Guess a letter A-Z')
         
-#         pass
-        
-#     def update():
-#         pass
-        
-#     def letter_val(self):
-        
-#         pass
 
-director = Director()
-director.game_start()
+    def _do_outputs(self):
+        self.results()
+
+        self._score = len(self._display.guessed_letters_display)
+        if self._score == 5:
+           self._is_playing = False
+           print('GAME OVER')
+           print(f'The word was: {self.hidden_word.secret_word}.')
+
+        elif "_" not in self._display.word_display:
+            self._is_playing = False
+            print('You WON!')
