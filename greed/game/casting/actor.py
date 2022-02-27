@@ -22,7 +22,8 @@ class Actor:
         self._font_size = 15
         self._color = Color(255, 255, 255)
         self._position = Point(0, 0)
-        self._velocity = Point(0, -1)
+        self._velocity = Point(0, 0)
+        self._score = 0
 
     def get_color(self):
         """Gets the actor's color as a tuple of three ints (r, g, b).
@@ -63,6 +64,14 @@ class Actor:
             Point: The actor's speed and direction.
         """
         return self._velocity
+    
+    def get_score(self):
+        """Gets the actor's score.
+        
+        Returns:
+            int: The actor's score.
+        """
+        return self._score
     
     def move_next(self, max_x, max_y):
         """Moves the actor to its next position according to its velocity. Will wrap the position 
@@ -115,3 +124,23 @@ class Actor:
             velocity (Point): The given velocity.
         """
         self._velocity = velocity
+
+    def set_score(self,score):
+        """Updates the score to the given one.
+        
+        Args:
+            int: The given score.
+        """
+        self._score = score
+    
+
+    def create_score_board(self, total_score):
+        """Updates the banner to the given one.
+            Combines score with text.
+        
+        Args:
+            total_score: The new total_score.
+        """
+        score_board = str(f'Score: {str(total_score)}')
+
+        return score_board

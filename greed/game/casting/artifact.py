@@ -5,27 +5,34 @@ class Artifact(Actor):
     """
     An item of cultural or historical interest. 
     
-    The responsibility of an Artifact is to provide a score value when collected.
+    The responsibility of an Artifact is to provide a message about itself.
 
     Attributes:
         _message (string): A short description about the artifact.
     """
     def __init__(self):
         super().__init__()
-        self._score = ""
+        self._value = 0
         
-    def get_score(self):
-        """Gets the artifact's message.
+    def get_value(self):
+        """Gets the artifact's value.
         
         Returns:
-            string: The message.
+            string: The value.
         """
-        return self._score
+        return self._value
     
-    def set_score(self, score):
-        """Updates the score to the given one.
-        
+    def set_value(self, text):
+        """Updates the value to the given one
+            dependent on the text being a * or O.
+
+            * = gem
+            O = Rock
         Args:
-            message (string): The Score.
+            value (string): The given value.
         """
-        self._score = score
+        if text == '*':
+            value = 1
+        elif text == 'O':
+            value = -1
+        self._value = value

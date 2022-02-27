@@ -1,5 +1,3 @@
-from game.shared.point import Point
-
 class Director:
     """A person who directs the game. 
     
@@ -34,7 +32,7 @@ class Director:
         self._video_service.close_window()
 
     def _get_inputs(self, cast):
-        """Gets directional input from the keyboard and applies it to the robot.
+        """Gets directional input from the keyboard and applies it to the player.
         
         Args:
             cast (Cast): The cast of actors.
@@ -51,19 +49,22 @@ class Director:
         """
         banner = cast.get_first_actor("banners")
         player = cast.get_first_actor("players")
-        artifacts = cast.get_first_actor("artifacts")
+        artifacts = cast.get_actors("artifacts")
 
-        banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         player.move_next(max_x, max_y)
-
-        artifacts.set_velocity(Point(0, -1))
-        
-        # for artifact in artifacts:
-        #     if player.get_position().equals(artifact.get_position()):
-        #         message = artifact.get_score()
-        #         banner.set_text(message)    
+        """Defines the values of each artifact, and maintains the scoreboard"""
+        for artifact in artifacts:
+            artifact.move_next(max_x, max_y)
+            if player.get_position().equals(artifact.get_position()):
+                current_score = banner.get_score()
+                value = artifact.get_value()
+                total_score = value + current_score
+                banner.set_score(total_score) 
+                score_board = banner.create_score_board(total_score)
+                banner.set_text(score_board)
+                cast.remove_actor("artifacts", artifact)
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.

@@ -18,18 +18,14 @@ FRAME_RATE = 12
 MAX_X = 900
 MAX_Y = 600
 CELL_SIZE = 15
-FONT_SIZE = 15
+FONT_SIZE = 20
 COLS = 60
 ROWS = 40
 CAPTION = "Greed"
-DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 10
-#GEM_WEIGHT = 1
-#ROCK_WEIGHT = 5
-ROCK = "o"
-GEM = "*"
-artifact_list = [ROCK, GEM]
+DEFAULT_ARTIFACTS = 100
+artifcat_list = ['O', '*']
+START_SCORE = 0
 
 def main():
     
@@ -38,11 +34,14 @@ def main():
     
     # create the banner
     banner = Actor()
-    banner.set_text("")
+    banner.set_score(START_SCORE)
+    score_board = banner.create_score_board(banner._score)
+    banner.set_text(score_board)
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
     cast.add_actor("banners", banner)
+
     
     # create the player
     x = int(MAX_X / 2)
@@ -50,24 +49,24 @@ def main():
     position = Point(x, y)
 
     player = Actor()
-    player.set_text("U")
+    player.set_text("#")
     player.set_font_size(FONT_SIZE)
     player.set_color(WHITE)
     player.set_position(position)
     cast.add_actor("players", player)
     
-    # # create the artifacts
-    # with open(DATA_PATH) as file:
-    #     data = file.read()
-    #     messages = data.splitlines()
+    #create artifacts
+    '''Creates gems and rocks'''
 
     for n in range(DEFAULT_ARTIFACTS):
-        text = random.choice(artifact_list)
+        text = random.choice(artifcat_list)
+
         x = random.randint(1, COLS - 1)
-        y = 1
+        y = random.randint(-200 , 1)
         position = Point(x, y)
         position = position.scale(CELL_SIZE)
-
+        velocity = Point(0,5)
+        
         r = random.randint(0, 255)
         g = random.randint(0, 255)
         b = random.randint(0, 255)
@@ -78,11 +77,10 @@ def main():
         artifact.set_font_size(FONT_SIZE)
         artifact.set_color(color)
         artifact.set_position(position)
-        artifact.set_velocity(Point(0, 1))
-        # artifact.set_message(message)
+        artifact.set_velocity(velocity)
+        artifact.set_value(text)
         cast.add_actor("artifacts", artifact)
     
-
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
