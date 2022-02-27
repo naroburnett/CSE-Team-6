@@ -65,8 +65,8 @@ def main():
         y = random.randint(-200 , 1)
         position = Point(x, y)
         position = position.scale(CELL_SIZE)
-        velocity = Point(0,5)
-        
+        velocity = Point(0,3)
+
         r = random.randint(0, 255)
         g = random.randint(0, 255)
         b = random.randint(0, 255)
