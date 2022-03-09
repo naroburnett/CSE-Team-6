@@ -19,11 +19,6 @@ class Point:
         self._x = x
         self._y = y
 
-    def __add__(self, other):
-        x = self._x + other.get_x()
-        y = self._y + other.get_y()
-        return Point(x, y)
-
     def add(self, other):
         """Gets a new point that is the sum of this and the given one.
 
@@ -37,9 +32,6 @@ class Point:
         y = self._y + other.get_y()
         return Point(x, y)
 
-    def __eq__(self,other):
-        return self._x == other.get_x() and self._y == other.get_y()
-    
     def equals(self, other):
         """Whether or not this Point is equal to the given one.
 
@@ -76,10 +68,6 @@ class Point:
         new_x = self._x * -1
         new_y = self._y * -1
         return Point(new_x, new_y)
-
-
-    def __mul__(self, factor):
-         return Point(self._x * factor, self._y * factor)
 
     def scale(self, factor):
         """
