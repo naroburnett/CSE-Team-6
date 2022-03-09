@@ -23,6 +23,7 @@ def main():
     #creates platyer 2
     player_2 = Cycle()
     
+    
     # create the cast
     cast = Cast()
     cast.add_actor("foods", Food())
