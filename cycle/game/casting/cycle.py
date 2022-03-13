@@ -15,7 +15,6 @@ class Cycle(Actor):
     def __init__(self):
         super().__init__()
         self._segments = []
-        self._prepare_body()
 
     def get_segments(self):
         return self._segments
@@ -43,26 +42,28 @@ class Cycle(Actor):
             velocity = tail.get_velocity()
             offset = velocity.reverse()
             position = tail.get_position().add(offset)
+            bound = self.get_segments()
+            color = bound[1].get_color()
             
             segment = Actor()
             segment.set_position(position)
             segment.set_velocity(velocity)
             segment.set_text("#")
-            segment.set_color(constants.GREEN)
+            segment.set_color(color)
             self._segments.append(segment)
 
     def turn_head(self, velocity):
         self._segments[0].set_velocity(velocity)
-    
-    def _prepare_body(self):
-        x = int(constants.MAX_X / 2)
-        y = int(constants.MAX_Y / 2)
+
+    def _prepare_body(self, pos_x, pos_y , color_body, color_head):
+        x = int(pos_x)
+        y = int(pos_y)
 
         for i in range(constants.SNAKE_LENGTH):
             position = Point(x - i * constants.CELL_SIZE, y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
             text = "8" if i == 0 else "#"
-            color = constants.YELLOW if i == 0 else constants.GREEN
+            color = color_head if i == 0 else color_body
             
             segment = Actor()
             segment.set_position(position)
