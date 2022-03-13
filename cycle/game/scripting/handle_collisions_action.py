@@ -58,10 +58,12 @@ class HandleCollisionsAction(Action):
         cycle = cast.get_first_actor("cycles")
         head = cycle.get_segments()[0]
         segments = cycle.get_segments()[1:]
+
         cycle2 = cast.get_first_actor("cycles2")
         head2 = cycle2.get_segments()[0]
         segments2 = cycle2.get_segments()[1:]
         
+        #self damage
         for segment in segments:
             if head.get_position().equals(segment.get_position()):
                 self._is_game_over_player_1 = False
@@ -70,6 +72,7 @@ class HandleCollisionsAction(Action):
             if head2.get_position().equals(segment2.get_position()):
                 self._is_game_over_player_2 = False
 
+        #PVP damage
         for segment in segments:
             if head2.get_position().equals(segment.get_position()):
                 self._is_game_over_player_2 = True

@@ -20,8 +20,8 @@ from game.shared.point import Point
 def main():
     #creates player 1
     player_1 = Cycle()
-    pos_x = 300
-    pos_y = 300
+    pos_x = 200
+    pos_y = 200
     color_body = constants.YELLOW
     color_head = constants.GREEN
 
@@ -29,8 +29,8 @@ def main():
 
     #creates platyer 2
     player_2 = Cycle()
-    pos_x = 600
-    pos_y = 600
+    pos_x = 500
+    pos_y = 500
     color_body = constants.RED
     color_head = constants.BLUE
 
