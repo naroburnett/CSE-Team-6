@@ -1,4 +1,4 @@
-from pickle import FALSE
+
 
 
 class Property():
@@ -10,7 +10,7 @@ class Property():
         self.rent = None
         self.houses = [None,None,None,None,None] #[0] = 1st house, [1] = 2nd house...
         self.mortgage = None
-        self.is_mortgage = FALSE
+        self.is_mortgage = 0
         self.no_of_houses = 0
         self.owner = None
 
