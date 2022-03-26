@@ -1,0 +1,6 @@
+ID[0], name[1], cost[2], 1 owned rent[3], 2 owned rent[4], 3 owned rent[5], 4 owned rent[6], mortgage[7]
+
+rr1,Reading Railroad,200,25,50,100,200,100
+rr2,Pennsylvania Railroad,200,25,50,100,200,100
+rr3,B&O Railroad,200,25,50,100,200,100
+rr4,Short Line,200,25,50,100,200,100

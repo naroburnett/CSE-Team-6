@@ -1,0 +1,4 @@
+ID[0], name[1], cost[2], 1 owned rent[3], 2 owned rent[4], mortgage[5]
+
+u1,Electric Company,150,rand(1-6)*4,rand(1-6)*10,75
+u2,Water Works,150,rand(1-6)*4,rand(1-6)*10,75
