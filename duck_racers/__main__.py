@@ -2,28 +2,29 @@ import pygame
 import time
 import math
 from utils import scale_image, blit_rotate_center, blit_text_center
-msuc = ("msc/hotline-bling.mp3")
+msuc = ("snds/hotline-bling.mp3")
 pygame.init()
 pygame.mixer.init()
 pygame.mixer.music.load(msuc)
 pygame.mixer.music.play(-1)
+
 pygame.font.init()
 
 
-WATER = scale_image(pygame.image.load("imgs/water.jpg"), 2.5)
-TRACK = scale_image(pygame.image.load("imgs/track.png"), 0.9)
+WATER = scale_image(pygame.image.load("imgs/water6.jpg"), 2)
 
-TRACK_BORDER = scale_image(pygame.image.load("imgs/track-border.png"), 0.9)
-TRACK_BORDER_MASK = pygame.mask.from_surface(TRACK_BORDER)
 
-FINISH = pygame.image.load("imgs/finish.png")
+BORDER = scale_image(pygame.image.load("imgs/track-border.png"), 0.9)
+BORDER_MASK = pygame.mask.from_surface(BORDER)
+
+FINISH = scale_image(pygame.image.load("imgs/finish_fish.png"), 0.087)
 FINISH_MASK = pygame.mask.from_surface(FINISH)
 FINISH_POSITION = (130, 250)
 
 YELLOW_DUCK = scale_image(pygame.image.load("imgs/Yellow-Duck.png"), 0.03)
 GREEN_DUCK = scale_image(pygame.image.load("imgs/green-duck.png"), 0.03)
 
-WIDTH, HEIGHT = TRACK.get_width(), TRACK.get_height()
+WIDTH, HEIGHT = BORDER.get_width(), BORDER.get_height()
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Duck Race")
 
@@ -126,7 +127,7 @@ class PlayerCar(AbstractCar):
 
 class ComputerCar(AbstractCar):
     IMG = GREEN_DUCK
-    START_POS = (150, 200)
+    START_POS = (140, 200)
 
     def __init__(self, max_vel, rotation_vel, path=[]):
         super().__init__(max_vel, rotation_vel)
@@ -222,12 +223,11 @@ def move_player(player_car):
 
 
 def handle_collision(player_car, computer_car, game_info):
-    if player_car.collide(TRACK_BORDER_MASK) != None:
+    if player_car.collide(BORDER_MASK) != None:
         player_car.bounce()
 
 
-    computer_finish_poi_collide = computer_car.collide(
-        FINISH_MASK, *FINISH_POSITION)
+    computer_finish_poi_collide = computer_car.collide(FINISH_MASK, *FINISH_POSITION)
     if computer_finish_poi_collide != None:
         blit_text_center(WIN, MAIN_FONT, "You lost!")
         pygame.display.update()
@@ -236,8 +236,7 @@ def handle_collision(player_car, computer_car, game_info):
         player_car.reset()
         computer_car.reset()
 
-    player_finish_poi_collide = player_car.collide(
-        FINISH_MASK, *FINISH_POSITION)
+    player_finish_poi_collide = player_car.collide(FINISH_MASK, *FINISH_POSITION)
     if player_finish_poi_collide != None:
         if player_finish_poi_collide[1] == 0:
             player_car.bounce()
@@ -249,8 +248,8 @@ def handle_collision(player_car, computer_car, game_info):
 
 run = True
 clock = pygame.time.Clock()
-images = [(WATER, (0, 0)), (TRACK, (0, 0)),
-          (FINISH, FINISH_POSITION), (TRACK_BORDER, (0, 0))]
+images = [(WATER, (0, 0)),
+          (FINISH, FINISH_POSITION), (BORDER, (0, 0))]
 player_car = PlayerCar(4, 4)
 computer_car = ComputerCar(2, 4, PATH)
 game_info = GameInfo()
@@ -262,7 +261,7 @@ while run:
 
     while not game_info.started:
         blit_text_center(
-            WIN, MAIN_FONT, f"Press SPACE to start level {game_info.level}!")
+            WIN, MAIN_FONT, f"Press any key to start level {game_info.level}!")
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
